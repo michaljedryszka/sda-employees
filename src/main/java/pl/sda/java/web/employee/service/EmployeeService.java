@@ -6,7 +6,7 @@ import pl.sda.java.web.employee.model.Employee;
 
 import java.util.List;
 
-public class EmployeeService extends AbstractExecuteOperationService {
+public class EmployeeService extends AbstractExecuteOperationService<Employee> {
 
     public PagedResult<Employee> getEmployee(int from, int to){
 

@@ -6,8 +6,9 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import pl.sda.java.web.employee.model.Department;
 
-public abstract class AbstractExecuteOperationService {
+public abstract class AbstractExecuteOperationService<T> {
     protected <T> T executeOperation(Operation<T> operation) {
         final StandardServiceRegistry standardServiceRegistry = new StandardServiceRegistryBuilder().configure().build();
         try(SessionFactory sessionFactory = new MetadataSources(standardServiceRegistry).buildMetadata().buildSessionFactory()) {
@@ -21,4 +22,13 @@ public abstract class AbstractExecuteOperationService {
             throw new RuntimeException(e);
         }
     }
+
+    public <T> void save(T t) {
+        Operation operation = (session -> {
+            session.saveOrUpdate(t);
+            return t;
+        });
+        executeOperation(operation);
+    }
+
 }

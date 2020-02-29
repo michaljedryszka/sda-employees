@@ -11,7 +11,7 @@ import pl.sda.java.web.employee.model.Department;
 
 import java.util.List;
 
-public class DepartmentService extends AbstractExecuteOperationService{
+public class DepartmentService extends AbstractExecuteOperationService<Department>{
 
     public List<Department> getAllDepartments(){
         Operation<List<Department>> operation = (session -> {
@@ -23,11 +23,7 @@ public class DepartmentService extends AbstractExecuteOperationService{
     }
 
     public void save(Department department) {
-        Operation operation = (session -> {
-            session.saveOrUpdate(department);
-            return department;
-        });
-        executeOperation(operation);
+        super.save(department);
     }
 
     public Department find(String deptNo) {
