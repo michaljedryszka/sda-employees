@@ -11,7 +11,7 @@ import pl.sda.java.web.employee.model.Department;
 
 import java.util.List;
 
-public class DepartmentService {
+public class DepartmentService extends AbstractExecuteOperationService{
 
     public List<Department> getAllDepartments(){
         Operation<List<Department>> operation = (session -> {
@@ -39,23 +39,4 @@ public class DepartmentService {
         });
         return executeOperation(operation);
     }
-
-    private <T> T executeOperation(Operation<T> operation) {
-        final StandardServiceRegistry standardServiceRegistry = new StandardServiceRegistryBuilder().configure().build();
-        try(SessionFactory sessionFactory = new MetadataSources(standardServiceRegistry).buildMetadata().buildSessionFactory()) {
-            Session session = sessionFactory.openSession();
-            Transaction transaction = session.beginTransaction();
-            T result = operation.execute(session);
-
-            transaction.commit();
-            session.close();
-            return result;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-}
-
-interface Operation<T> {
-    T execute(Session session);
 }
