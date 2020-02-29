@@ -14,7 +14,6 @@ public abstract class AbstractExecuteOperationService {
             Session session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
             T result = operation.execute(session);
-
             transaction.commit();
             session.close();
             return result;
