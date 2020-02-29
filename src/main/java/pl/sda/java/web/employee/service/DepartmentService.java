@@ -35,13 +35,13 @@ public class DepartmentService {
         executeOperation(operation);
     }
 
-    public Object executeOperation(Operation operation) {
+    public <T> T executeOperation(Operation<T> operation) {
         final StandardServiceRegistry standardServiceRegistry = new StandardServiceRegistryBuilder().configure().build();
         try(SessionFactory sessionFactory = new MetadataSources(standardServiceRegistry).buildMetadata().buildSessionFactory()) {
             Session session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
 
-            Object result = operation.execute(session);
+            T result = operation.execute(session);
 
             transaction.commit();
             session.close();
@@ -52,6 +52,6 @@ public class DepartmentService {
     }
 }
 
-interface Operation {
-    Object execute(Session session);
+interface Operation<T> {
+    T execute(Session session);
 }
