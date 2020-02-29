@@ -31,12 +31,7 @@ public class DepartmentService {
     }
 
     public void save(Department department) {
-        Operation operation = new Operation(){
-            @Override
-            public Object execute(Session session) {
-                return session.save(department);
-            }
-        };
+        Operation operation = (session -> session.save(department));
         executeOperation(operation);
     }
 
