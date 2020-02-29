@@ -24,4 +24,13 @@ public class DepartmentsServlet extends HttpServlet {
         req.getRequestDispatcher("/WEB-INF/jsp/departments.jsp")
                 .forward(req, resp);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Department department = Department.builder()
+                .deptNo(req.getParameter("deptNo"))
+                .deptName(req.getParameter("deptName"))
+                .build();
+        departmentService.save(department);
+    }
 }

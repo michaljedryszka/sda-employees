@@ -29,4 +29,34 @@ public class DepartmentService {
             throw new RuntimeException(e);
         }
     }
+
+    public void save(Department department) {
+        Operation operation = new Operation(){
+            @Override
+            public Object execute(Session session) {
+                return session.save(department);
+            }
+        };
+        executeOperation(operation);
+    }
+
+    public Object executeOperation(Operation operation) {
+        final StandardServiceRegistry standardServiceRegistry = new StandardServiceRegistryBuilder().configure().build();
+        try(SessionFactory sessionFactory = new MetadataSources(standardServiceRegistry).buildMetadata().buildSessionFactory()) {
+            Session session = sessionFactory.openSession();
+            Transaction transaction = session.beginTransaction();
+
+            Object result = operation.execute(session);
+
+            transaction.commit();
+            session.close();
+            return result;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
+
+interface Operation {
+    Object execute(Session session);
 }

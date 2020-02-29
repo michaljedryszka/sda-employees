@@ -1,6 +1,8 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<form>
-    
+<form method="POST">
+    Nr: <input name="deptNo" /><br/>
+    Name: <input name="deptName" /><br/>
+    <input type="submit" value="Save"/>
 </form>
 Departments:
 <c:forEach items="${departments}" var = "dep">
