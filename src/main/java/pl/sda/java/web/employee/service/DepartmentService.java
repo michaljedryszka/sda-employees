@@ -14,33 +14,37 @@ import java.util.List;
 public class DepartmentService {
 
     public List<Department> getAllDepartments(){
-        final StandardServiceRegistry standardServiceRegistry = new StandardServiceRegistryBuilder().configure().build();
-        try(SessionFactory sessionFactory = new MetadataSources(standardServiceRegistry).buildMetadata().buildSessionFactory()) {
-            Session session = sessionFactory.openSession();
-            Transaction transaction = session.beginTransaction();
-
+        Operation<List<Department>> operation = (session -> {
             Query<Department> query = session.createQuery("SELECT d from Department d", Department.class);
             List<Department> resultList = query.getResultList();
-
-            transaction.commit();
-            session.close();
             return resultList;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        });
+        return executeOperation(operation);
     }
 
     public void save(Department department) {
-        Operation operation = (session -> session.save(department));
+        Operation operation = (session -> {
+            session.saveOrUpdate(department);
+            return department;
+        });
         executeOperation(operation);
     }
 
-    public <T> T executeOperation(Operation<T> operation) {
+    public Department find(String deptNo) {
+        Operation<Department> operation = (session -> {
+            Query<Department> query = session.createQuery(
+                    "SELECT d FROM Department d WHERE d.deptNo=:deptNo", Department.class);
+            query.setParameter("deptNo", deptNo);
+            return query.uniqueResult();
+        });
+        return executeOperation(operation);
+    }
+
+    private <T> T executeOperation(Operation<T> operation) {
         final StandardServiceRegistry standardServiceRegistry = new StandardServiceRegistryBuilder().configure().build();
         try(SessionFactory sessionFactory = new MetadataSources(standardServiceRegistry).buildMetadata().buildSessionFactory()) {
             Session session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
-
             T result = operation.execute(session);
 
             transaction.commit();
