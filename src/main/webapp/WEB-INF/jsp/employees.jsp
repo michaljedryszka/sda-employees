@@ -1,4 +1,8 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<form>
+<input name="searchText"/>
+<input type="submit" value="Search"/>
+</form>
 Employees:
 <a href="?page=${employees.firstPage}">${employees.firstPage}</a>
 <a href="?page=${employees.currentPage - 5}">...</a>

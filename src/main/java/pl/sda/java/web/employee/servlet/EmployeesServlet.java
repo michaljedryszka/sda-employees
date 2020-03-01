@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
 
-@WebServlet(name="employees", urlPatterns = "/employees")
+@WebServlet(name = "employees", urlPatterns = "/employees")
 public class EmployeesServlet extends HttpServlet {
 
     public static final int PAGE_SIZE = 100;
@@ -23,11 +23,15 @@ public class EmployeesServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String page = req.getParameter("page");
         int offset = 0;
-        if(Objects.nonNull(page)){
+        if (Objects.nonNull(page)) {
             offset = (Integer.valueOf(page) - 1) * PAGE_SIZE;
         }
-
-        PagedResult<Employee> employees = employeeService.getEmployee(offset, PAGE_SIZE);
+        PagedResult<Employee> employees;
+        if (Objects.nonNull(req.getParameter("searchText"))) {
+            employees = employeeService.findEmployee(req.getParameter("searchText"), offset, PAGE_SIZE);
+        } else {
+            employees = employeeService.getEmployee(offset, PAGE_SIZE);
+        }
         req.setAttribute("employees", employees);
         req.getRequestDispatcher("/WEB-INF/jsp/employees.jsp").forward(req, resp);
     }
