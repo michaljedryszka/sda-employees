@@ -31,8 +31,23 @@ public class PagedResult<T> {
     }
 
     public List<Integer> getPreviousPages(){
-        return null;
+        List<Integer> pages = new ArrayList<>();
+        for(int i = getCurrentPage() - 5 ; i < getCurrentPage(); i++){
+            if(i > 0)
+                pages.add(i);
+        }
+        return pages;
     }
+
+    public List<Integer> getNextPages(){
+        List<Integer> pages = new ArrayList<>();
+        for(int i = getCurrentPage() + 1 ; i <= getCurrentPage() + 5 ; i++){
+            if(i <= getLastPage())
+                pages.add(i);
+        }
+        return pages;
+    }
+
 
     public int getCurrentPage(){
         return 1 + (offset/pageSize);
