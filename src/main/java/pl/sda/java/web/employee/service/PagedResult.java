@@ -35,6 +35,6 @@ public class PagedResult<T> {
     }
 
     public int getCurrentPage(){
-
+        return 1 + (offset/pageSize);
     }
 }

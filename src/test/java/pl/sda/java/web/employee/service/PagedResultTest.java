@@ -27,6 +27,30 @@ public class PagedResultTest {
     }
 
     @Test
-    public void getCurrentPage() {
+    public void getCurrentPage1() {
+        pagedResult.setOffset(0);
+        pagedResult.setPageSize(100);
+        pagedResult.setTotalCount(10000);
+
+        assertEquals(1, pagedResult.getCurrentPage());
     }
+
+    @Test
+    public void getCurrentPage5() {
+        pagedResult.setOffset(500);
+        pagedResult.setPageSize(100);
+        pagedResult.setTotalCount(10000);
+
+        assertEquals(6, pagedResult.getCurrentPage());
+    }
+
+    @Test
+    public void getCurrentPage10() {
+        pagedResult.setOffset(999);
+        pagedResult.setPageSize(100);
+        pagedResult.setTotalCount(10000);
+
+        assertEquals(10, pagedResult.getCurrentPage());
+    }
+
 }
