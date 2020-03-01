@@ -28,7 +28,11 @@ public class EmployeesServlet extends HttpServlet {
         }
         PagedResult<Employee> employees;
         if (Objects.nonNull(req.getParameter("searchText"))) {
-            employees = employeeService.findEmployee(req.getParameter("searchText"), offset, PAGE_SIZE);
+            req.getSession().setAttribute("sessionSearchText", req.getParameter("searchText"));
+        }
+        String sessionSearchText = (String) req.getSession().getAttribute("sessionSearchText");
+        if(Objects.nonNull(sessionSearchText)){
+            employees = employeeService.findEmployee(sessionSearchText, offset, PAGE_SIZE);
         } else {
             employees = employeeService.getEmployee(offset, PAGE_SIZE);
         }

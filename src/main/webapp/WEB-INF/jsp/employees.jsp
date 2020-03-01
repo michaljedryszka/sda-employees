@@ -1,6 +1,6 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <form>
-<input name="searchText"/>
+<input name="searchText" value="${sessionSearchText}"/>
 <input type="submit" value="Search"/>
 </form>
 Employees:
