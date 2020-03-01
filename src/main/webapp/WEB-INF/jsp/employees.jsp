@@ -29,6 +29,11 @@ Employees:
     <td><c:out value="${emp.empNo}"/></td>
     <td><c:out value="${emp.firstName}"/> <c:out value="${emp.lastName}"/></td>
     <td><c:out value="${emp.gender}"/></td>
+    <td>
+        <c:forEach items="${emp.employeeDepartments}" var="empDept">
+            ${empDept.department.deptName}
+        </c:forEach>
+    </td>
 </tr>
 </c:forEach>
 </table>
