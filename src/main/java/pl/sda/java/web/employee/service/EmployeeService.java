@@ -59,6 +59,6 @@ public class EmployeeService extends AbstractExecuteOperationService<Employee> {
 
     public static void main(String[] args) {
         EmployeeService es = new EmployeeService();
-        System.out.println(es.findEmployee("a", 0, 100).getResult().size());
+        System.out.println(es.findEmployee("a", 0, 100).getResult().get(0).getEmployeeDepartments().size());
     }
 }

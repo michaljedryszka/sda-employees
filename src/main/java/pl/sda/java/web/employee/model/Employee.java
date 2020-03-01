@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Builder
@@ -37,4 +38,7 @@ public class Employee {
 
     @Column(name="hire_date")
     private LocalDate hireDate;
+
+    @OneToMany(mappedBy = "employee", fetch = FetchType.EAGER)
+    private List<EmployeeDepartment> employeeDepartments;
 }
