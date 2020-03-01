@@ -22,10 +22,6 @@ public class DepartmentService extends AbstractExecuteOperationService<Departmen
         return executeOperation(operation);
     }
 
-    public void save(Department department) {
-        super.save(department);
-    }
-
     public Department find(String deptNo) {
         Operation<Department> operation = (session -> {
             Query<Department> query = session.createQuery(
