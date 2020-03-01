@@ -98,6 +98,12 @@ public class PagedResultTest {
     }
 
     @Test
+    public void getCurrentPageTotalCount() {
+        pagedResult.setOffset(10000);
+        assertEquals(pagedResult.getLastPage(), pagedResult.getCurrentPage());
+    }
+
+    @Test
     public void getCurrentPage10() {
         pagedResult.setOffset(999);
 

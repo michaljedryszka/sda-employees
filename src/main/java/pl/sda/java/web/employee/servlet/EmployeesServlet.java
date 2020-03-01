@@ -10,15 +10,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Objects;
 
 @WebServlet(name="employees", urlPatterns = "/employees")
 public class EmployeesServlet extends HttpServlet {
+
+    public static final int PAGE_SIZE = 100;
 
     private EmployeeService employeeService = new EmployeeService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PagedResult<Employee> employees = employeeService.getEmployee(0, 100);
+        String page = req.getParameter("page");
+        int offset = 0;
+        if(Objects.nonNull(page)){
+            offset = (Integer.valueOf(page) - 1) * PAGE_SIZE;
+        }
+
+        PagedResult<Employee> employees = employeeService.getEmployee(offset, PAGE_SIZE);
         req.setAttribute("employees", employees);
         req.getRequestDispatcher("/WEB-INF/jsp/employees.jsp").forward(req, resp);
     }

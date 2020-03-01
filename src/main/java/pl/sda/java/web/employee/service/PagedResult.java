@@ -27,7 +27,7 @@ public class PagedResult<T> {
     }
 
     public int getLastPage(){
-        return (int) (totalCount/pageSize);
+        return (int) (totalCount/pageSize) + 1;
     }
 
     public List<Integer> getPreviousPages(){
@@ -42,7 +42,7 @@ public class PagedResult<T> {
     public List<Integer> getNextPages(){
         List<Integer> pages = new ArrayList<>();
         for(int i = getCurrentPage() + 1 ; i <= getCurrentPage() + 5 ; i++){
-            if(i <= getLastPage())
+            if(i < getLastPage())
                 pages.add(i);
         }
         return pages;
