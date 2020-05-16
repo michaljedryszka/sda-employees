@@ -23,9 +23,6 @@
         <property name="hbm2ddl.auto">validate</property>
 
         <!-- Names the annotated entity class -->
-        <mapping class="pl.sda.java.web.employee.model.Department"/>
-        <mapping class="pl.sda.java.web.employee.model.Employee"/>
-        <mapping class="pl.sda.java.web.employee.model.EmployeeDepartment"/>
     </session-factory>
 
 </hibernate-configuration>
