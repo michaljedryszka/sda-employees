@@ -1,3 +1,5 @@
+package pl.sda.java.web.employee.service;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -9,8 +11,9 @@ import pl.sda.java.web.employee.model.Department;
 
 import java.util.List;
 
-public class Runner {
-    public static void main(String[] args) {
+public class DepartmentService {
+
+    public List<Department> listDepartments(){
         final StandardServiceRegistry standardServiceRegistry = new StandardServiceRegistryBuilder().configure().build();
         try(SessionFactory sessionFactory = new MetadataSources(standardServiceRegistry).buildMetadata().buildSessionFactory()) {
             Session session = sessionFactory.openSession();
@@ -18,12 +21,12 @@ public class Runner {
 
             Query<Department> query = session.createQuery("SELECT d from Department d", Department.class);
             List<Department> resultList = query.getResultList();
-            System.out.println(resultList);
 
             transaction.commit();
             session.close();
+            return resultList;
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 }
