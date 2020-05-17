@@ -9,4 +9,8 @@ public class EmployeeService extends ServiceDao{
     public List<Employee> listEmployees(){
         return this.executeForList("SELECT e from Employee e", Employee.class);
     }
+
+    public List<Employee> listEmployees(int offest, int limit){
+        return this.executeForList("SELECT e from Employee e", Employee.class, offest, limit);
+    }
 }
