@@ -25,6 +25,8 @@
         <!-- Names the annotated entity class -->
         <mapping class="pl.sda.java.web.employee.model.Department" />
         <mapping class="pl.sda.java.web.employee.model.Employee" />
+        <mapping class="pl.sda.java.web.employee.model.DepartmentEmployee" />
+        <mapping class="pl.sda.java.web.employee.model.Title" />
     </session-factory>
 
 </hibernate-configuration>

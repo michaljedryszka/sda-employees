@@ -6,6 +6,7 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.query.Query;
 import pl.sda.java.web.employee.model.Department;
+import pl.sda.java.web.employee.model.DepartmentEmployee;
 import pl.sda.java.web.employee.model.Employee;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class Runner {
             Session session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
 
-            Query<Employee> query = session.createQuery("SELECT e from Employee e", Employee.class);
+            Query<DepartmentEmployee> query = session.createQuery("SELECT e from DepartmentEmployee e", DepartmentEmployee.class);
             System.out.println(query.getResultList().size());
 
             transaction.commit();
