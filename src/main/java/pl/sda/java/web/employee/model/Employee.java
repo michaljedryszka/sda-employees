@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -27,7 +24,8 @@ public class Employee {
     private String firstName;
     @Column(name = "last_name", length = 16)
     private String lastName;
-    @Column(name = "gender")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gender", length = 1, columnDefinition = "enum")
     private Gender gender;
     @Column(name = "hire_date")
     private LocalDate hireDate;
