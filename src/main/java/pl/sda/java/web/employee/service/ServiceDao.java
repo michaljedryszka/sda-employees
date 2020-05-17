@@ -31,14 +31,14 @@ public abstract class ServiceDao {
         });
     }
 
-    protected <T> List<T> execute(Function<Session, List<T>> f) {
+    protected <T> T execute(Function<Session, T> f) {
         final StandardServiceRegistry standardServiceRegistry = new StandardServiceRegistryBuilder().configure().build();
 
         try (SessionFactory sessionFactory = new MetadataSources(standardServiceRegistry).buildMetadata().buildSessionFactory()) {
             Session session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
 
-            List<T> result = f.apply(session);
+            T result = f.apply(session);
 
             transaction.commit();
             session.close();

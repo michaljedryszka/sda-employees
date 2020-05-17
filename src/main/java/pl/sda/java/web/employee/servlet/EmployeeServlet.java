@@ -16,7 +16,12 @@ public class EmployeeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("employees", employeeService.listEmployees());
+        String showPage = req.getParameter("showPage");
+        int page = 1;
+        if(showPage != null){
+            page = Integer.valueOf(showPage);
+        }
+        req.setAttribute("employees", employeeService.listEmployees(page));
         req.getRequestDispatcher("WEB-INF/jsp/employees.jsp").forward(req, resp);
     }
 }
