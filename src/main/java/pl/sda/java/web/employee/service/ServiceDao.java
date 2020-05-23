@@ -55,4 +55,11 @@ public abstract class ServiceDao {
             return null;
         });
     }
+
+    public <T> void delete(T t) {
+        this.execute((session) -> {
+            session.delete(t);
+            return null;
+        });
+    }
 }

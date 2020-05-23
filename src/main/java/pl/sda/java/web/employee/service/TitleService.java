@@ -30,4 +30,11 @@ public class TitleService extends ServiceDao {
                 .build();
         save(title);
     }
+
+    public void removeTitle(String title, Employee employee, LocalDate fromDate) {
+        List<Title> titlesToRemove = employee.getTitles().stream()
+                .filter(t -> t.getTitle().equals(title) && t.getFromDate().equals(fromDate))
+                .collect(Collectors.toList());
+        titlesToRemove.forEach(t -> delete(t));
+    }
 }

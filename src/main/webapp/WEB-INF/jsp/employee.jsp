@@ -81,7 +81,7 @@
  <table class="table">
    <thead class="thead-dark">
    <tr>
-     <th>Title</th><th>From date</th><th>To date</th>
+     <th>Title</th><th>From date</th><th>To date</th><th></th>
    </tr>
    </thead>
    <tbody>
@@ -90,6 +90,14 @@
        <td><c:out value = "${title.title}"/></td>
        <td><c:out value = "${title.fromDate}"/></td>
        <td><c:out value = "${title.toDate}"/></td>
+       <td>
+           <form method="POST" action="removetitle">
+               <button type="submit" class="btn btn-primary">X</button>
+               <input type="hidden" name="id" value="<c:out value = "${employee.empNo}"/>" />
+               <input type="hidden" name="title" value="<c:out value = "${title.title}"/>" />
+               <input type="hidden" name="fromDate" value="<c:out value = "${title.fromDate}"/>" />
+           </form>
+       </td>
      </tr>
    </c:forEach>
      <tr>
