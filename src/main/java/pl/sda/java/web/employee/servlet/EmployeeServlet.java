@@ -30,7 +30,7 @@ public class EmployeeServlet extends HttpServlet {
         employee.setFirstName(req.getParameter("firstName"));
         employee.setLastName(req.getParameter("lastName"));
         employeeService.save(employee);
-        req.setAttribute("employee", employee);
-        req.getRequestDispatcher("WEB-INF/jsp/employee.jsp").forward(req, resp);
+        //after post redirect
+        resp.sendRedirect("employee?id=" + id);
     }
 }
