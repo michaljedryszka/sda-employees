@@ -48,4 +48,11 @@ public abstract class ServiceDao {
             throw new RuntimeException(e);
         }
     }
+
+    public <T> void save(T t) {
+        this.execute((session) -> {
+            session.saveOrUpdate(t);
+            return null;
+        });
+    }
 }

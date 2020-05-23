@@ -3,7 +3,8 @@
 
  <div class="card">
  <div class="card-body">
- <form>
+ <form method="POST">
+    <input type="hidden" name="id" value="<c:out value = "${employee.empNo}"/>" />
      <div class="form-group row">
       <label for="empNo" class="col-sm-2 col-form-label">Emp no.</label>
       <div class="col-sm-7">
@@ -54,8 +55,10 @@
         placeholder="Enter hire date" value="<c:out value = "${employee.hireDate}" />"/ >
       </div>
      </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
  </form>
-
+ <hr/>
+ <p>Departments</p>
  <table class="table">
    <thead class="thead-dark">
    <tr>
@@ -73,7 +76,8 @@
    </c:forEach>
    </tbody>
  </table>
-
+ <hr/>
+ <p>Titles</p>
  <table class="table">
    <thead class="thead-dark">
    <tr>

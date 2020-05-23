@@ -22,4 +22,15 @@ public class EmployeeServlet extends HttpServlet {
         req.setAttribute("employee", employee);
         req.getRequestDispatcher("WEB-INF/jsp/employee.jsp").forward(req, resp);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id = req.getParameter("id");
+        Employee employee = employeeService.getByEmployeeNumber(Integer.valueOf(id));
+        employee.setFirstName(req.getParameter("firstName"));
+        employee.setLastName(req.getParameter("lastName"));
+        employeeService.save(employee);
+        req.setAttribute("employee", employee);
+        req.getRequestDispatcher("WEB-INF/jsp/employee.jsp").forward(req, resp);
+    }
 }
