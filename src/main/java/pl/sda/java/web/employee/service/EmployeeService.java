@@ -33,4 +33,12 @@ public class EmployeeService extends ServiceDao {
 
         });
     }
+
+    public Employee getByEmployeeNumber(Integer empNo){
+        return this.execute((session) -> {
+            Query<Employee> empQuery = session.createQuery("SELECT e from Employee e WHERE e.empNo=:empNo");
+            empQuery.setParameter("empNo", empNo);
+            return empQuery.getSingleResult();
+        });
+    }
 }
