@@ -92,6 +92,14 @@
        <td><c:out value = "${title.toDate}"/></td>
      </tr>
    </c:forEach>
+     <tr>
+       <form method="POST" action="addtitle">
+           <td><input type="text" name="newTitle"/> <button type="submit" class="btn btn-primary">Add</button></td>
+           <input type="hidden" name="id" value="<c:out value = "${employee.empNo}"/>" />
+       </form>
+       <td></td>
+       <td></td>
+     </tr>
    </tbody>
  </table>
 
