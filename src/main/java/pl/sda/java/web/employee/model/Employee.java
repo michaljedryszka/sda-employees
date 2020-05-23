@@ -10,11 +10,14 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.ZoneOffset;
+import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name="employees")
+@Table(name = "employees")
 @Data
 @Builder
 @AllArgsConstructor
@@ -46,4 +49,17 @@ public class Employee {
 //    @Fetch(value = FetchMode.SUBSELECT)
 //    @JoinColumn(name = "emp_no")
     private List<Title> titles;
+
+    public Title getActiveTitle() {
+        Date now = new Date();
+        Title title = titles.stream().filter(t -> {
+            long fromDate = t.getFromDate().atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli();
+            long toDate = t.getToDate().atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli();
+            if (fromDate < now.getTime() && (now.getTime() < toDate || t.getToDate() == null)) {
+                return true;
+            }
+            return false;
+        }).findFirst().orElseGet(Title::new);
+        return title;
+    }
 }

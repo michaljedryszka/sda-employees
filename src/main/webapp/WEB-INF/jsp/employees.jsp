@@ -25,8 +25,8 @@
   <tbody>
   <c:forEach items="${employees.records}" var = "employee">
     <tr>
-      <td><c:out value = "${employee.empNo}"/></td>
-      <td><c:out value = "${employee.titles[0].title} ${employee.firstName} ${employee.lastName} ${employee.departmentEmployee[0].department.deptName}"/></td>
+      <td><a href="employee?id=<c:out value = "${employee.empNo}"/>"><c:out value = "${employee.empNo}"/></a></td>
+      <td><c:out value = "${employee.activeTitle.title} ${employee.firstName} ${employee.lastName} ${employee.departmentEmployee[0].department.deptName}"/></td>
     </tr>
   </c:forEach>
   </tbody>
