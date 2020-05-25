@@ -41,7 +41,7 @@
      <div class="form-group row">
       <label for="gender" class="col-sm-2 col-form-label">Gender</label>
       <div class="col-sm-7">
-       <select name="gender">
+       <select name="gender" class="form-control">
         <option id="F" <c:if test="${employee.gender == 'F'}">selected</c:if> >F</option>
         <option id="M" <c:if test="${employee.gender == 'M'}">selected</c:if> >M</option>
        </select>

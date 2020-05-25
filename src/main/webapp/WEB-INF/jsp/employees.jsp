@@ -4,10 +4,10 @@
 <table class="table">
   <thead class="thead-dark">
   <tr>
-    <th>Number</th><th>Details</th>
+    <th>Number</th><th>Details</th><th><ahref="addEmployee">Add employee</a></th>
   </tr>
   <tr>
-    <th colspan="2">
+    <th colspan="3">
       <c:set var="initialPage" value="1"/>
       <c:if test = "${employees.currentPage - 5 > 0}">
         <c:set var="initialPage" value="${employees.currentPage - 5}"/>
@@ -26,7 +26,7 @@
   <c:forEach items="${employees.records}" var = "employee">
     <tr>
       <td><a href="employee?id=<c:out value = "${employee.empNo}"/>"><c:out value = "${employee.empNo}"/></a></td>
-      <td><c:out value = "${employee.activeTitle.title} ${employee.firstName} ${employee.lastName} ${employee.departmentEmployee[0].department.deptName}"/></td>
+      <td colspan="2"><c:out value = "${employee.activeTitle.title} ${employee.firstName} ${employee.lastName} ${employee.departmentEmployee[0].department.deptName}"/></td>
     </tr>
   </c:forEach>
   </tbody>
